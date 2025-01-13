@@ -17,8 +17,8 @@ func _physics_process(delta: float) -> void:
 	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		#velocity.y = JUMP_VELOCITY
 		
-	character_direction.x = Input.get_axis("ui_left", "ui_right")
-	character_direction.y = Input.get_axis("ui_up", "ui_down")
+	character_direction.x = Input.get_axis("move_left", "move_right")
+	character_direction.y = Input.get_axis("move_up", "move_down")
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
