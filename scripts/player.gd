@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 600.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const ROTATION_SPEED = 20
 
@@ -23,6 +23,11 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	if character_direction.x > 0:
+		animated_sprite.flip_v = false
+	elif character_direction.x < 0:
+		animated_sprite.flip_v = true
+	
 	if character_direction:
 		var current_rotation = rotation
 		var target_rotation = atan2(velocity.x, -velocity.y)

@@ -2,6 +2,8 @@ extends Node2D
 
 var enemy = preload("res://scenes/enemy.tscn")
 var enemy_spawned = false
+@onready var game: Node2D = $".."
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
