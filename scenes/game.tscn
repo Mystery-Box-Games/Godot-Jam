@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm3g5ebpa5i15"]
+[gd_scene load_steps=4 format=3 uid="uid://dm3g5ebpa5i15"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_57s07"]
 [ext_resource type="PackedScene" uid="uid://cj0a4jepaf2ko" path="res://scenes/player.tscn" id="2_l1t88"]
+[ext_resource type="PackedScene" uid="uid://b7mkdyodwdiqi" path="res://scenes/spawner.tscn" id="3_jiqvt"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_57s07")
@@ -12,3 +13,6 @@ zoom = Vector2(0.25, 0.25)
 
 [node name="Player" parent="." instance=ExtResource("2_l1t88")]
 position = Vector2(557, 433)
+
+[node name="Spawner" parent="." instance=ExtResource("3_jiqvt")]
+position = Vector2(-8, 0)
