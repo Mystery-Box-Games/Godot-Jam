@@ -7,7 +7,7 @@ var player_position
 var target_position
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var player = get_parent().get_parent().get_node("Player")
+@onready var player = get_parent().get_parent().get_parent().get_node("Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,4 +22,4 @@ func _physics_process(delta: float) -> void:
 	target_position = (player_position - global_position).normalized()
 	if (global_position.distance_to(player_position) > min_distance):
 		move_and_collide(target_position * SPEED)
-	look_at(player_position)
+	#look_at(player_position)

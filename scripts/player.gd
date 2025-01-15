@@ -24,15 +24,15 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if character_direction.x > 0:
-		animated_sprite.flip_v = false
+		animated_sprite.flip_h = false
 	elif character_direction.x < 0:
-		animated_sprite.flip_v = true
+		animated_sprite.flip_h = true
 	
 	if character_direction:
 		var current_rotation = rotation
 		var target_rotation = atan2(velocity.x, -velocity.y)
 		
-		rotation = lerp_angle(current_rotation, target_rotation, ROTATION_SPEED * delta)
+		#rotation = lerp_angle(current_rotation, target_rotation, ROTATION_SPEED * delta)
 		velocity = (character_direction.normalized()) * SPEED
 		
 		
