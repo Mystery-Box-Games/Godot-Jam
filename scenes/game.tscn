@@ -14,12 +14,13 @@ script = ExtResource("1_xgjex")
 wait_time = 2.0
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(559, 433)
-zoom = Vector2(2, 2)
-
 [node name="Player" parent="." instance=ExtResource("2_l1t88")]
 position = Vector2(380, 348)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(3.8147e-06, 0.400002)
+scale = Vector2(0.2, 0.2)
+position_smoothing_enabled = true
 
 [node name="Spawners" type="Node" parent="."]
 

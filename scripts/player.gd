@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 3
 const JUMP_VELOCITY = -400.0
 const ROTATION_SPEED = 20
 
@@ -33,7 +33,8 @@ func _physics_process(delta: float) -> void:
 		var target_rotation = atan2(velocity.x, -velocity.y)
 		
 		#rotation = lerp_angle(current_rotation, target_rotation, ROTATION_SPEED * delta)
-		velocity = (character_direction.normalized()) * SPEED
+		#velocity = (character_direction.normalized()) * SPEED
+		move_and_collide(character_direction.normalized() * SPEED)
 		
 		
 		#velocity = character_direction * SPEED
