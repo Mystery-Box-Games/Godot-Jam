@@ -15,7 +15,7 @@ position = Vector2(559, 433)
 zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("2_l1t88")]
-position = Vector2(557, 433)
+position = Vector2(380, 348)
 
 [node name="Spawner" parent="." instance=ExtResource("3_jiqvt")]
-position = Vector2(475, 324)
+position = Vector2(694, 453)
