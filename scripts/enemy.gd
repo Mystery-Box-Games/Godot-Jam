@@ -22,4 +22,4 @@ func _physics_process(delta: float) -> void:
 	target_position = (player_position - global_position).normalized()
 	if (global_position.distance_to(player_position) > min_distance):
 		move_and_collide(target_position * SPEED)
-	#look_at(player_position)
+	look_at(player_position)
