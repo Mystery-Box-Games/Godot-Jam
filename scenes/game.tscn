@@ -20,6 +20,7 @@ position = Vector2(380, 348)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(3.8147e-06, 0.400002)
 scale = Vector2(0.2, 0.2)
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="Spawners" type="Node" parent="."]
