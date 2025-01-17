@@ -12,7 +12,20 @@ var character_direction : Vector2
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var game_manager: Node = %GameManager
+@onready var mouse_collision: CollisionShape2D = $mouse_collision
+@onready var snake_collision: CollisionShape2D = $snake_collision
+@onready var badger_collision: CollisionShape2D = $badger_collision
+@onready var crocodile_collision: CollisionShape2D = $crocodile_collision
+@onready var lion_collision: CollisionShape2D = $lion_collision
+@onready var bear_collision: CollisionShape2D = $bear_collision
 
+func _ready() -> void:
+	#disable collision boxes
+	snake_collision.disabled = true
+	badger_collision.disabled = true
+	crocodile_collision.disabled = true
+	lion_collision.disabled = true
+	bear_collision.disabled = true
 
 func _physics_process(delta: float) -> void:
 
@@ -50,21 +63,100 @@ func change_character(dice_roll: int) -> void:
 		1: # mouse
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
+			
+			# enable collision
+			mouse_collision.disabled = false
+			
+			# disable all other collision
+			snake_collision.disabled = true
+			badger_collision.disabled = true
+			crocodile_collision.disabled = true
+			lion_collision.disabled = true
+			bear_collision.disabled = true
+	
 		2: # snake
 			sprite_idle = "snake_idle"
 			sprite_run = "snake_run"
+			
+			# enable collision
+			snake_collision.disabled = false
+			
+			# disable all other collision
+			mouse_collision.disabled = true
+			badger_collision.disabled = true
+			crocodile_collision.disabled = true
+			lion_collision.disabled = true
+			bear_collision.disabled = true
+			
 		3: #badger
 			sprite_idle = "badger_idle"
 			sprite_run = "badger_run"
+			
+			# enable collision
+			badger_collision.disabled = false
+			
+			# disable all other collision
+			mouse_collision.disabled = true
+			snake_collision.disabled = true
+			crocodile_collision.disabled = true
+			lion_collision.disabled = true
+			bear_collision.disabled = true
+			
 		4: # crocodile
 			sprite_idle = "crocodile_idle"
 			sprite_run = "crocodile_run"
+			
+			# scale up cause he's too small
+			scale = Vector2(5, 5)
+			
+			# enable collision
+			crocodile_collision.disabled = false
+			
+			# disable all other collision
+			mouse_collision.disabled = true
+			snake_collision.disabled = true
+			badger_collision.disabled = true
+			lion_collision.disabled = true
+			bear_collision.disabled = true
+			
 		5: # lion
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
+			
+			# enable collision
+			lion_collision.disabled = false
+			
+			# disable all other collision
+			mouse_collision.disabled = true
+			snake_collision.disabled = true
+			badger_collision.disabled = true
+			crocodile_collision.disabled = true
+			bear_collision.disabled = true
+			
 		6: # bear
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
+			
+			# enable collision
+			bear_collision.disabled = false
+			
+			# disable all other collision
+			mouse_collision.disabled = true
+			snake_collision.disabled = true
+			badger_collision.disabled = true
+			crocodile_collision.disabled = true
+			lion_collision.disabled = true
+			
 		_: # default
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
+			
+			# enable collision
+			mouse_collision.disabled = false
+			
+			# disable all other collision
+			snake_collision.disabled = true
+			badger_collision.disabled = true
+			crocodile_collision.disabled = true
+			lion_collision.disabled = true
+			bear_collision.disabled = true
