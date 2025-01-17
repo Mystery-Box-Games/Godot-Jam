@@ -1,6 +1,6 @@
 extends Node
 
-@onready var timer: Timer = $Timer
+@onready var spawn_timer: Timer = $SpawnTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,5 +11,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_timer_timeout():
+
+func _on_spawn_timer_timeout() -> void:
 	get_tree().call_group("spawners", "spawn_enemy")
+
+
+func _on_dice_timer_timeout() -> void:
+	# Pause game, roll dice, change character
+	pass

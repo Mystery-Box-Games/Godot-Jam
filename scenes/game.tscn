@@ -10,8 +10,12 @@
 unique_name_in_owner = true
 script = ExtResource("1_xgjex")
 
-[node name="Timer" type="Timer" parent="GameManager"]
+[node name="SpawnTimer" type="Timer" parent="GameManager"]
 wait_time = 2.0
+autostart = true
+
+[node name="DiceTimer" type="Timer" parent="GameManager"]
+wait_time = 30.0
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_l1t88")]
@@ -30,4 +34,5 @@ position = Vector2(694, 453)
 
 [node name="Spawner2" parent="Spawners" instance=ExtResource("3_jiqvt")]
 
-[connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="GameManager/DiceTimer" to="GameManager" method="_on_dice_timer_timeout"]
