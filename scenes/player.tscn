@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cj0a4jepaf2ko"]
+[gd_scene load_steps=41 format=3 uid="uid://cj0a4jepaf2ko"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qw6xx"]
 [ext_resource type="Texture2D" uid="uid://1vhxwunr410r" path="res://assets/sprites/MouseOverhead2-Sheet.png" id="2_1rqx4"]
@@ -140,7 +140,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"badger_run",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -165,7 +165,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"crocodile_run",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -190,7 +190,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"lion_run",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -246,7 +246,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"snake_run",
-"speed": 5.0
+"speed": 16.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fp5vb"]
@@ -254,12 +254,20 @@ radius = 4.5
 height = 12.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc6ij"]
-radius = 1.4
-height = 12.8
+radius = 2.5
+height = 21.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvfcq"]
 radius = 6.5
 height = 23.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lt0x0"]
+radius = 4.5
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l0npn"]
+radius = 5.5
+height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wgrxn"]
 radius = 7.07107
@@ -272,10 +280,12 @@ script = ExtResource("1_qw6xx")
 position = Vector2(-3.97904e-13, -1.19209e-07)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_5tx2n")
-animation = &"badger_run"
+animation = &"lion_idle"
 autoplay = "mouse_idle"
+frame_progress = 0.49092
 
 [node name="mouse_collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("CapsuleShape2D_fp5vb")
 
@@ -290,11 +300,10 @@ shape = SubResource("CapsuleShape2D_vvfcq")
 
 [node name="crocodile_collision" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource("CircleShape2D_wgrxn")
+shape = SubResource("CapsuleShape2D_lt0x0")
 
 [node name="lion_collision" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CircleShape2D_wgrxn")
+shape = SubResource("CapsuleShape2D_l0npn")
 
 [node name="bear_collision" type="CollisionShape2D" parent="."]
 visible = false

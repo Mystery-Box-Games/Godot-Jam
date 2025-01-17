@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 
-const SPEED = 3
+
 const JUMP_VELOCITY = -400.0
 const ROTATION_SPEED = 20
 
+var speed = 3
 var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
 
@@ -39,14 +40,14 @@ func _physics_process(delta: float) -> void:
 		var target_rotation = atan2(velocity.x, -velocity.y)
 		
 		rotation = lerp_angle(current_rotation, target_rotation, ROTATION_SPEED * delta)
-		velocity = (character_direction.normalized() * (SPEED * 100))
+		velocity = (character_direction.normalized() * (speed * 100))
 		
 		#move_and_collide(character_direction.normalized() * SPEED)
 		#velocity = character_direction * SPEED
 		#$".".rotation = atan2(velocity.x, -velocity.y)
 		
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		velocity = velocity.move_toward(Vector2.ZERO, speed)
 		
 	# Animations
 	if character_direction == Vector2.ZERO:
@@ -61,6 +62,10 @@ func change_character(dice_roll: int) -> void:
 	
 	match dice_roll:
 		1: # mouse
+			
+			# speed
+			speed = 3
+			
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
 			
@@ -75,6 +80,10 @@ func change_character(dice_roll: int) -> void:
 			bear_collision.disabled = true
 	
 		2: # snake
+			
+			# speed
+			speed = 2.5
+			
 			sprite_idle = "snake_idle"
 			sprite_run = "snake_run"
 			
@@ -89,6 +98,10 @@ func change_character(dice_roll: int) -> void:
 			bear_collision.disabled = true
 			
 		3: #badger
+			
+			#speed
+			speed = 2
+			
 			sprite_idle = "badger_idle"
 			sprite_run = "badger_run"
 			
@@ -103,11 +116,15 @@ func change_character(dice_roll: int) -> void:
 			bear_collision.disabled = true
 			
 		4: # crocodile
+			
+			# speed
+			speed = 1.5
+			
 			sprite_idle = "crocodile_idle"
 			sprite_run = "crocodile_run"
 			
 			# scale up cause he's too small
-			scale = Vector2(5, 5)
+			#scale = Vector2(5, 5)
 			
 			# enable collision
 			crocodile_collision.disabled = false
@@ -120,8 +137,12 @@ func change_character(dice_roll: int) -> void:
 			bear_collision.disabled = true
 			
 		5: # lion
-			sprite_idle = "mouse_idle"
-			sprite_run = "mouse_run"
+			
+			# speed
+			speed = 1.5
+			
+			sprite_idle = "lion_idle"
+			sprite_run = "lion_run"
 			
 			# enable collision
 			lion_collision.disabled = false
@@ -134,6 +155,10 @@ func change_character(dice_roll: int) -> void:
 			bear_collision.disabled = true
 			
 		6: # bear
+			
+			#speed
+			speed = .5
+			
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
 			
