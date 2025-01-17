@@ -23,3 +23,8 @@ func _physics_process(delta: float) -> void:
 	if (global_position.distance_to(player_position) > min_distance):
 		move_and_collide(target_position * SPEED)
 	look_at(player_position)
+	
+func change_color() -> void:
+	animated_sprite.modulate = Color(0, 1, 0)
+	
+	get_tree().change_scene_to_file("res://scenes/player.tscn")

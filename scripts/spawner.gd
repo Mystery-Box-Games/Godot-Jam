@@ -12,4 +12,5 @@ func _ready() -> void:
 
 func spawn_enemy():
 	var instance = enemy.instantiate()
+	instance.add_to_group("enemies")
 	add_child(instance)

@@ -1,6 +1,10 @@
 extends Node
 
+var dice_roll = 1;
+
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var player: CharacterBody2D = $"../Player"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,5 +21,12 @@ func _on_spawn_timer_timeout() -> void:
 
 
 func _on_dice_timer_timeout() -> void:
-	# Pause game, roll dice, change character
+	# Pause game
+	
+	# roll dice
+	dice_roll = randi() % 6 + 1
+	
+	# change character
+	player.change_character(dice_roll)
+	
 	pass
