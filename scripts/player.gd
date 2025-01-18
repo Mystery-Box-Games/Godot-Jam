@@ -203,11 +203,28 @@ func attack() -> void:
 				attacking = true
 				await get_tree().create_timer(.1).timeout
 				attacking = false
-				velocity = -(character_direction.normalized() * (BOOST))
+			3: # badger
+				velocity = (character_direction.normalized() * (2000))
+				attacking = true
+				await get_tree().create_timer(.1).timeout
+				attacking = false
+			4: # crocodile
+				velocity = (character_direction.normalized() * (2000))
+				attacking = true
+				await get_tree().create_timer(.1).timeout
+				attacking = false
+			5: # lion
+				velocity = (character_direction.normalized() * (2000))
+				attacking = true
+				await get_tree().create_timer(.1).timeout
+				attacking = false
+			6: # bear
+				velocity = (character_direction.normalized() * (2000))
+				attacking = true
+				await get_tree().create_timer(.1).timeout
+				attacking = false
 		
 		can_attack = false
-		
-		#attacking = false
 		await get_tree().create_timer(1.9).timeout
 		can_attack = true
 

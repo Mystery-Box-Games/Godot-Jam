@@ -284,7 +284,7 @@ rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_5tx2n")
 animation = &"snake_idle"
 autoplay = "mouse_idle"
-frame_progress = 0.113446
+frame_progress = 0.127319
 
 [node name="mouse_collision" type="CollisionShape2D" parent="."]
 visible = false
