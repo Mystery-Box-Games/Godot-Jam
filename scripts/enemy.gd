@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
+class_name Enemy
+
 const SPEED = 2
 const min_distance = 50;
+
+var health = 100
 
 var player_position
 var target_position
@@ -24,7 +28,12 @@ func _physics_process(delta: float) -> void:
 		move_and_collide(target_position * SPEED)
 	look_at(player_position)
 	
+	if (health <= 0): queue_free()
+	
 func change_color() -> void:
 	animated_sprite.modulate = Color(0, 1, 0)
 	
 	get_tree().change_scene_to_file("res://scenes/player.tscn")
+
+func attack(damage: int) -> void:
+	health -= damage

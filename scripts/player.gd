@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
 
-
-const JUMP_VELOCITY = -400.0
+const BOOST = 4000
 const ROTATION_SPEED = 20
 
 var speed = 3
 var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
+var can_attack = true
+var attacking = false
+var dice_roll = 1
 
 var character_direction : Vector2
 
@@ -19,6 +21,8 @@ var character_direction : Vector2
 @onready var crocodile_collision: CollisionShape2D = $crocodile_collision
 @onready var lion_collision: CollisionShape2D = $lion_collision
 @onready var bear_collision: CollisionShape2D = $bear_collision
+
+@onready var area_2d: Area2D = $Area2D
 
 func _ready() -> void:
 	#disable collision boxes
@@ -45,19 +49,21 @@ func _physics_process(delta: float) -> void:
 		#move_and_collide(character_direction.normalized() * SPEED)
 		#velocity = character_direction * SPEED
 		#$".".rotation = atan2(velocity.x, -velocity.y)
-		
+	
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, speed)
-		
+	
 	# Animations
 	if character_direction == Vector2.ZERO:
 		animated_sprite.play(sprite_idle)
 	else:
 		animated_sprite.play(sprite_run)
-
+	
+	attack()
 	move_and_slide()
 
-func change_character(dice_roll: int) -> void:
+func change_character(new_roll: int) -> void:
+	dice_roll = new_roll
 	print("Dice rolled a ", dice_roll)
 	
 	match dice_roll:
@@ -185,3 +191,27 @@ func change_character(dice_roll: int) -> void:
 			crocodile_collision.disabled = true
 			lion_collision.disabled = true
 			bear_collision.disabled = true
+
+func attack() -> void:
+	if Input.is_action_pressed("attack") && can_attack:
+		match dice_roll:
+			1: # mouse
+				velocity = (character_direction.normalized() * (BOOST))
+			2: # snake
+				# lunge foward, attack
+				velocity = (character_direction.normalized() * (2000))
+				attacking = true
+				await get_tree().create_timer(.1).timeout
+				attacking = false
+				velocity = -(character_direction.normalized() * (BOOST))
+		
+		can_attack = false
+		
+		#attacking = false
+		await get_tree().create_timer(1.9).timeout
+		can_attack = true
+
+
+func _on_attackzone_body_entered(body: Node2D) -> void:
+	if body is Enemy && attacking:
+		body.attack(100)

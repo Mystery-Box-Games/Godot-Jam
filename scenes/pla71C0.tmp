@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cj0a4jepaf2ko"]
+[gd_scene load_steps=41 format=3 uid="uid://cj0a4jepaf2ko"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qw6xx"]
 [ext_resource type="Texture2D" uid="uid://1vhxwunr410r" path="res://assets/sprites/MouseOverhead2-Sheet.png" id="2_1rqx4"]
@@ -272,8 +272,6 @@ height = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_wgrxn"]
 radius = 18.5068
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0wag"]
-
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_qw6xx")
@@ -282,12 +280,11 @@ script = ExtResource("1_qw6xx")
 position = Vector2(-3.97904e-13, -1.19209e-07)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_5tx2n")
-animation = &"snake_idle"
+animation = &"mouse_idle"
 autoplay = "mouse_idle"
-frame_progress = 0.485827
+frame_progress = 0.446361
 
 [node name="mouse_collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("CapsuleShape2D_fp5vb")
 
@@ -311,12 +308,3 @@ shape = SubResource("CapsuleShape2D_l0npn")
 [node name="bear_collision" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_wgrxn")
-
-[node name="Attackzone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackzone"]
-position = Vector2(0, -22)
-shape = SubResource("RectangleShape2D_q0wag")
-
-[connection signal="body_entered" from="Attackzone" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Attackzone" to="." method="_on_attackzone_body_entered"]

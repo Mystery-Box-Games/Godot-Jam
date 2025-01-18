@@ -24,9 +24,9 @@ func _on_dice_timer_timeout() -> void:
 	# Pause game
 	
 	# roll dice
-	dice_roll = randi() % 6 + 1
+	#dice_roll = randi() % 6 + 1
 	
 	# change character
-	player.change_character(dice_roll)
+	player.change_character(2)
 	
 	pass
