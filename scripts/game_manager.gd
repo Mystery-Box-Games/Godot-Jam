@@ -15,6 +15,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func game_over() -> void:
+	print("game over!")
 
 func _on_spawn_timer_timeout() -> void:
 	get_tree().call_group("spawners", "spawn_enemy")

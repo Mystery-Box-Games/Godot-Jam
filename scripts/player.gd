@@ -10,6 +10,7 @@ var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
 var can_attack = true
 var attacking = false
+var taking_damage = false
 var dice_roll = 1
 
 var character_direction : Vector2
@@ -22,14 +23,12 @@ var percentage_of_time
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var game_manager: Node = %GameManager
-@onready var mouse_collision: CollisionShape2D = $mouse_collision
-@onready var snake_collision: CollisionShape2D = $snake_collision
-@onready var badger_collision: CollisionShape2D = $badger_collision
-@onready var crocodile_collision: CollisionShape2D = $crocodile_collision
-@onready var lion_collision: CollisionShape2D = $lion_collision
-@onready var bear_collision: CollisionShape2D = $bear_collision
-
-@onready var area_2d: Area2D = $Area2D
+@onready var mouse_collision: CollisionShape2D = $Hurtzone/mouse_collision
+@onready var snake_collision: CollisionShape2D = $Hurtzone/snake_collision
+@onready var badger_collision: CollisionShape2D = $Hurtzone/badger_collision
+@onready var crocodile_collision: CollisionShape2D = $Hurtzone/crocodile_collision
+@onready var lion_collision: CollisionShape2D = $Hurtzone/lion_collision
+@onready var bear_collision: CollisionShape2D = $Hurtzone/bear_collision
 
 func _ready() -> void:
 	#disable collision boxes
@@ -42,7 +41,11 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	health = clamp(health, 0, 100)
 	health_bar.value = health
+	
+	if (health <= 0):
+		game_manager.game_over()
 	
 	if attack_timer.get_time_left() > 0:
 		percentage_of_time = ((1 - attack_timer.get_time_left() / attack_timer.get_wait_time()) * 100)
@@ -208,7 +211,9 @@ func change_character(new_roll: int) -> void:
 			bear_collision.disabled = true
 
 func take_damage() -> void:
-	pass
+	health -= 5
+	await get_tree().create_timer(.1).timeout
+	taking_damage = false
 
 func attack() -> void:
 	if Input.is_action_pressed("attack") && can_attack:
@@ -274,3 +279,9 @@ func _on_attack_timer_timeout() -> void:
 func _on_attackzone_body_entered(body: Node2D) -> void:
 	if body is Enemy && attacking:
 		body.attack(100)
+
+
+func _on_hurtzone_body_entered(body: Node2D) -> void:
+	if body is Enemy && !taking_damage:
+		taking_damage = true
+		take_damage()
