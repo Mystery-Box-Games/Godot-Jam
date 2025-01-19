@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpdokuggsdb1j"]
+
+[ext_resource type="Texture2D" uid="uid://ce6eifg5o5b5i" path="res://assets/sprites/healthbar_empty.png" id="1_cajjp"]
+[ext_resource type="Texture2D" uid="uid://da7v2gj85diou" path="res://assets/sprites/healthbar_full.png" id="2_7tjvx"]
+[ext_resource type="Texture2D" uid="uid://dte4datyqo2ao" path="res://assets/sprites/attackbar_empty.png" id="3_0v83h"]
+[ext_resource type="Texture2D" uid="uid://cnldcijqquspj" path="res://assets/sprites/attackbar_full.png" id="4_a2v4u"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 21.0
+offset_top = 24.0
+offset_right = 319.0
+offset_bottom = 82.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 17
+stretch_margin_top = 17
+stretch_margin_right = 17
+stretch_margin_bottom = 17
+texture_under = ExtResource("1_cajjp")
+texture_progress = ExtResource("2_7tjvx")
+
+[node name="AttackBar" type="TextureProgressBar" parent="."]
+offset_left = 15.0
+offset_top = 439.0
+offset_right = 84.0
+offset_bottom = 623.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 17
+stretch_margin_top = 18
+stretch_margin_right = 17
+stretch_margin_bottom = 18
+texture_under = ExtResource("3_0v83h")
+texture_progress = ExtResource("4_a2v4u")

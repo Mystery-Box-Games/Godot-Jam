@@ -4,6 +4,7 @@ extends CharacterBody2D
 const BOOST = 4000
 const ROTATION_SPEED = 20
 
+var health = 100
 var speed = 3
 var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
@@ -12,6 +13,12 @@ var attacking = false
 var dice_roll = 1
 
 var character_direction : Vector2
+
+var percentage_of_time
+
+@onready var health_bar: TextureProgressBar = $"../UI/HealthBar"
+@onready var attack_bar: TextureProgressBar = $"../UI/AttackBar"
+@onready var attack_timer: Timer = $AttackTimer
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var game_manager: Node = %GameManager
@@ -31,8 +38,16 @@ func _ready() -> void:
 	crocodile_collision.disabled = true
 	lion_collision.disabled = true
 	bear_collision.disabled = true
+	
+	
 
 func _physics_process(delta: float) -> void:
+	health_bar.value = health
+	
+	if attack_timer.get_time_left() > 0:
+		percentage_of_time = ((1 - attack_timer.get_time_left() / attack_timer.get_wait_time()) * 100)
+		var use_int = int(percentage_of_time)
+		attack_bar.value = percentage_of_time
 
 	# get direction from keyboard
 	character_direction.x = Input.get_axis("move_left", "move_right")
@@ -165,8 +180,8 @@ func change_character(new_roll: int) -> void:
 			#speed
 			speed = .5
 			
-			sprite_idle = "mouse_idle"
-			sprite_run = "mouse_run"
+			sprite_idle = "bear_idle"
+			sprite_run = "bear_run"
 			
 			# enable collision
 			bear_collision.disabled = false
@@ -192,42 +207,67 @@ func change_character(new_roll: int) -> void:
 			lion_collision.disabled = true
 			bear_collision.disabled = true
 
+
 func attack() -> void:
 	if Input.is_action_pressed("attack") && can_attack:
+		can_attack = false
+		print("attacking")
+		var time
 		match dice_roll:
 			1: # mouse
 				velocity = (character_direction.normalized() * (BOOST))
+				
+				# wait time
+				time = 2
 			2: # snake
 				# lunge foward, attack
 				velocity = (character_direction.normalized() * (2000))
 				attacking = true
 				await get_tree().create_timer(.1).timeout
 				attacking = false
+				
+				time = 1.9
 			3: # badger
 				velocity = (character_direction.normalized() * (2000))
 				attacking = true
 				await get_tree().create_timer(.1).timeout
 				attacking = false
+				
+				# wait time
+				time = 1
 			4: # crocodile
 				velocity = (character_direction.normalized() * (2000))
 				attacking = true
 				await get_tree().create_timer(.1).timeout
 				attacking = false
+				
+				# wait time
+				time = 1.5
 			5: # lion
 				velocity = (character_direction.normalized() * (2000))
 				attacking = true
 				await get_tree().create_timer(.1).timeout
 				attacking = false
+				
+				# wait time
+				time = 1
 			6: # bear
 				velocity = (character_direction.normalized() * (2000))
 				attacking = true
 				await get_tree().create_timer(.1).timeout
 				attacking = false
+				
+				# wait time
+				time = .5
 		
-		can_attack = false
-		await get_tree().create_timer(1.9).timeout
-		can_attack = true
+		#await get_tree().create_timer(time).timeout
+		attack_timer.start(time)
+		
 
+func _on_attack_timer_timeout() -> void:
+	attack_bar.value = 100
+	can_attack = true
+	
 
 func _on_attackzone_body_entered(body: Node2D) -> void:
 	if body is Enemy && attacking:

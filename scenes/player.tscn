@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://cj0a4jepaf2ko"]
+[gd_scene load_steps=48 format=3 uid="uid://cj0a4jepaf2ko"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qw6xx"]
 [ext_resource type="Texture2D" uid="uid://1vhxwunr410r" path="res://assets/sprites/MouseOverhead2-Sheet.png" id="2_1rqx4"]
 [ext_resource type="Texture2D" uid="uid://cbya4mi0i5g6e" path="res://assets/sprites/Badger-Sheet.png" id="2_m5d1s"]
+[ext_resource type="Texture2D" uid="uid://bcdkl0aou5f3e" path="res://assets/sprites/Bear-Sheet.png" id="3_ge0ye"]
 [ext_resource type="Texture2D" uid="uid://rkiasmx33xpw" path="res://assets/sprites/Snake-Sheet.png" id="3_ombfu"]
 [ext_resource type="Texture2D" uid="uid://f4rlgvumwm7n" path="res://assets/sprites/Crocodile-Sheet.png" id="3_wx3dd"]
 [ext_resource type="Texture2D" uid="uid://byw8fph8ayjeu" path="res://assets/sprites/Lion-Sheet.png" id="4_5momk"]
@@ -25,6 +26,26 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_neej6"]
 atlas = ExtResource("2_m5d1s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vrej"]
+atlas = ExtResource("3_ge0ye")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0wvx"]
+atlas = ExtResource("3_ge0ye")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkwb7"]
+atlas = ExtResource("3_ge0ye")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2hyl"]
+atlas = ExtResource("3_ge0ye")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loh3s"]
+atlas = ExtResource("3_ge0ye")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ownsu"]
@@ -141,6 +162,31 @@ animations = [{
 "loop": true,
 "name": &"badger_run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vrej")
+}],
+"loop": true,
+"name": &"bear_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0wvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkwb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2hyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loh3s")
+}],
+"loop": true,
+"name": &"bear_run",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -269,8 +315,9 @@ height = 28.0
 radius = 5.5
 height = 20.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wgrxn"]
-radius = 18.5068
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78oty"]
+radius = 9.5
+height = 29.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q0wag"]
 
@@ -282,9 +329,9 @@ script = ExtResource("1_qw6xx")
 position = Vector2(-3.97904e-13, -1.19209e-07)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_5tx2n")
-animation = &"snake_idle"
+animation = &"bear_run"
 autoplay = "mouse_idle"
-frame_progress = 0.127319
+frame_progress = 0.56872
 
 [node name="mouse_collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -309,8 +356,7 @@ visible = false
 shape = SubResource("CapsuleShape2D_l0npn")
 
 [node name="bear_collision" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CircleShape2D_wgrxn")
+shape = SubResource("CapsuleShape2D_78oty")
 
 [node name="Attackzone" type="Area2D" parent="."]
 
@@ -318,5 +364,9 @@ shape = SubResource("CircleShape2D_wgrxn")
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_q0wag")
 
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Attackzone" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Attackzone" to="." method="_on_attackzone_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
