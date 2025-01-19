@@ -175,7 +175,7 @@ func change_character(new_roll: int) -> void:
 			
 			sprite_idle = "lion_idle"
 			sprite_run = "lion_run"
-			sprite_attack = ""
+			sprite_attack = "lion_attack"
 			
 			# enable collision
 			lion_collision.disabled = false
@@ -263,8 +263,8 @@ func attack() -> void:
 			5: # lion
 				velocity = (character_direction.normalized() * (2000))
 				attacking = true
-				await get_tree().create_timer(.1).timeout
-				attacking = false
+				#await get_tree().create_timer(.1).timeout
+				#attacking = false
 				
 				# wait time
 				time = 1
