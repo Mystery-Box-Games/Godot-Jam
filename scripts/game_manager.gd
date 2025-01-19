@@ -2,9 +2,12 @@ extends Node
 
 var dice_roll = 1;
 
+@onready var dice_timer: Timer = $DiceTimer
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var player: CharacterBody2D = $"../Player"
-@onready var game_over_ui: VBoxContainer = $"../UI/GameOverUI"
+@onready var game_over_ui: ColorRect = $"../UI/GameOverUI"
+@onready var ui_timer: Label = $"../UI/UITimer"
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +17,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	ui_timer.text = "Change In: %ss" % int(dice_timer.get_time_left() + 1)
 
 func game_over() -> void:
 	player.process_mode = Node.PROCESS_MODE_DISABLED
@@ -31,6 +34,6 @@ func _on_dice_timer_timeout() -> void:
 	dice_roll = randi() % 6 + 1
 	
 	# change character
-	player.change_character(6)
+	player.change_character(dice_roll)
 	
 	pass
