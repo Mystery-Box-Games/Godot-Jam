@@ -8,7 +8,7 @@ var health = 100
 var speed = 3
 var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
-var sprite_attack = "bear_attack"
+var sprite_attack = ""
 var can_attack = true
 var attacking = false
 var taking_damage = false
@@ -96,6 +96,7 @@ func change_character(new_roll: int) -> void:
 			
 			sprite_idle = "mouse_idle"
 			sprite_run = "mouse_run"
+			sprite_attack = ""
 			
 			# enable collision
 			mouse_collision.disabled = false
@@ -114,6 +115,7 @@ func change_character(new_roll: int) -> void:
 			
 			sprite_idle = "snake_idle"
 			sprite_run = "snake_run"
+			sprite_attack = ""
 			
 			# enable collision
 			snake_collision.disabled = false
@@ -132,6 +134,7 @@ func change_character(new_roll: int) -> void:
 			
 			sprite_idle = "badger_idle"
 			sprite_run = "badger_run"
+			sprite_attack = ""
 			
 			# enable collision
 			badger_collision.disabled = false
@@ -150,6 +153,7 @@ func change_character(new_roll: int) -> void:
 			
 			sprite_idle = "crocodile_idle"
 			sprite_run = "crocodile_run"
+			sprite_attack = ""
 			
 			# scale up cause he's too small
 			#scale = Vector2(5, 5)
@@ -171,6 +175,7 @@ func change_character(new_roll: int) -> void:
 			
 			sprite_idle = "lion_idle"
 			sprite_run = "lion_run"
+			sprite_attack = ""
 			
 			# enable collision
 			lion_collision.disabled = false
@@ -185,10 +190,11 @@ func change_character(new_roll: int) -> void:
 		6: # bear
 			
 			#speed
-			speed = .5
+			speed = .8
 			
 			sprite_idle = "bear_idle"
 			sprite_run = "bear_run"
+			sprite_attack = "bear_attack"
 			
 			# enable collision
 			bear_collision.disabled = false
@@ -263,10 +269,8 @@ func attack() -> void:
 				# wait time
 				time = 1
 			6: # bear
-				velocity = (character_direction.normalized() * (2000))
+				#velocity = (character_direction.normalized() * (2000))
 				attacking = true
-				await get_tree().create_timer(.1).timeout
-				attacking = false
 				
 				# wait time
 				time = .5
@@ -289,3 +293,9 @@ func _on_hurtzone_body_entered(body: Node2D) -> void:
 	if body is Enemy && !taking_damage:
 		taking_damage = true
 		take_damage()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if (animated_sprite.animation == sprite_attack):
+		attacking = false
+		
