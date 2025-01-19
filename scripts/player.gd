@@ -45,6 +45,7 @@ func _physics_process(delta: float) -> void:
 	health_bar.value = health
 	
 	if (health <= 0):
+		set_process_input(false)
 		game_manager.game_over()
 	
 	if attack_timer.get_time_left() > 0:
