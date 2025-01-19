@@ -8,6 +8,7 @@ var health = 100
 var speed = 3
 var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
+var sprite_attack = "bear_attack"
 var can_attack = true
 var attacking = false
 var taking_damage = false
@@ -73,8 +74,10 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, speed)
 	
 	# Animations
-	if character_direction == Vector2.ZERO:
+	if character_direction == Vector2.ZERO && !attacking:
 		animated_sprite.play(sprite_idle)
+	elif attacking:
+		animated_sprite.play(sprite_attack)
 	else:
 		animated_sprite.play(sprite_run)
 	
