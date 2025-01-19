@@ -207,6 +207,8 @@ func change_character(new_roll: int) -> void:
 			lion_collision.disabled = true
 			bear_collision.disabled = true
 
+func take_damage() -> void:
+	pass
 
 func attack() -> void:
 	if Input.is_action_pressed("attack") && can_attack:

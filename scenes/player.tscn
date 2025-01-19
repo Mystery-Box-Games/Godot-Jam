@@ -329,9 +329,9 @@ script = ExtResource("1_qw6xx")
 position = Vector2(-3.97904e-13, -1.19209e-07)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_5tx2n")
-animation = &"bear_run"
+animation = &"snake_idle"
 autoplay = "mouse_idle"
-frame_progress = 0.56872
+frame_progress = 0.743605
 
 [node name="mouse_collision" type="CollisionShape2D" parent="."]
 visible = false
