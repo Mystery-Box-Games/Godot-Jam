@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cj0a4jepaf2ko"]
+[gd_scene load_steps=62 format=3 uid="uid://cj0a4jepaf2ko"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qw6xx"]
 [ext_resource type="Texture2D" uid="uid://1vhxwunr410r" path="res://assets/sprites/MouseOverhead2-Sheet.png" id="2_1rqx4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://rkiasmx33xpw" path="res://assets/sprites/Snake-Sheet.png" id="3_ombfu"]
 [ext_resource type="Texture2D" uid="uid://f4rlgvumwm7n" path="res://assets/sprites/Crocodile-Sheet.png" id="3_wx3dd"]
 [ext_resource type="Texture2D" uid="uid://byw8fph8ayjeu" path="res://assets/sprites/Lion-Sheet.png" id="4_5momk"]
+[ext_resource type="Texture2D" uid="uid://dp2q71rse22ik" path="res://assets/sprites/LionAttack-Sheet.png" id="6_n47l4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_naiyq"]
 atlas = ExtResource("2_m5d1s")
@@ -92,6 +93,30 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mksql"]
 atlas = ExtResource("3_wx3dd")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boc37"]
+atlas = ExtResource("6_n47l4")
+region = Rect2(0, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6punq"]
+atlas = ExtResource("6_n47l4")
+region = Rect2(32, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08ski"]
+atlas = ExtResource("6_n47l4")
+region = Rect2(64, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfv2v"]
+atlas = ExtResource("6_n47l4")
+region = Rect2(96, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dpfe"]
+atlas = ExtResource("6_n47l4")
+region = Rect2(128, 0, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8enoi"]
+atlas = ExtResource("6_n47l4")
+region = Rect2(160, 0, 32, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv1ro"]
 atlas = ExtResource("4_5momk")
@@ -263,6 +288,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_boc37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6punq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08ski")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfv2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dpfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8enoi")
+}],
+"loop": false,
+"name": &"lion_attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wv1ro")
 }],
 "loop": true,
@@ -377,10 +425,9 @@ script = ExtResource("1_qw6xx")
 position = Vector2(-3.97904e-13, -1.19209e-07)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_5tx2n")
-animation = &"bear_attack"
+animation = &"lion_attack"
 autoplay = "mouse_idle"
-frame = 5
-frame_progress = 1.0
+frame_progress = 0.835148
 
 [node name="mouse_collision" type="CollisionShape2D" parent="."]
 visible = false
