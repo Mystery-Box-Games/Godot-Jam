@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm3g5ebpa5i15"]
+[gd_scene load_steps=6 format=3 uid="uid://dm3g5ebpa5i15"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_xgjex"]
 [ext_resource type="PackedScene" uid="uid://cj0a4jepaf2ko" path="res://scenes/player.tscn" id="2_l1t88"]
 [ext_resource type="PackedScene" uid="uid://b7mkdyodwdiqi" path="res://scenes/spawner.tscn" id="3_jiqvt"]
 [ext_resource type="PackedScene" uid="uid://dpdokuggsdb1j" path="res://scenes/ui.tscn" id="4_ggn31"]
+[ext_resource type="PackedScene" uid="uid://8ku5f61d72bd" path="res://scenes/boundary.tscn" id="5_ptpon"]
 
 [node name="Game" type="Node2D"]
 
@@ -36,6 +37,10 @@ position = Vector2(694, 453)
 [node name="Spawner2" parent="Spawners" instance=ExtResource("3_jiqvt")]
 
 [node name="UI" parent="." instance=ExtResource("4_ggn31")]
+
+[node name="Boundary" parent="." instance=ExtResource("5_ptpon")]
+position = Vector2(389, 363)
+scale = Vector2(3.58219, 3.71417)
 
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="GameManager/DiceTimer" to="GameManager" method="_on_dice_timer_timeout"]

@@ -6,6 +6,7 @@ const ROTATION_SPEED = 20
 
 var health = 100
 var speed = 3
+var invincibility = .2
 var sprite_idle = "mouse_idle"
 var sprite_run = "mouse_run"
 var sprite_attack = ""
@@ -31,6 +32,14 @@ var percentage_of_time
 @onready var lion_collision: CollisionShape2D = $Hurtzone/lion_collision
 @onready var bear_collision: CollisionShape2D = $Hurtzone/bear_collision
 
+@onready var mouse_collisionMain: CollisionShape2D = $mouse_collision
+@onready var snake_collisionMain: CollisionShape2D = $snake_collision
+@onready var badger_collisionMain: CollisionShape2D = $badger_collision
+@onready var crocodile_collisionMain: CollisionShape2D = $crocodile_collision
+@onready var lion_collisionMain: CollisionShape2D = $lion_collision
+@onready var bear_collisionMain: CollisionShape2D = $bear_collision
+
+
 func _ready() -> void:
 	#disable collision boxes
 	snake_collision.disabled = true
@@ -39,7 +48,11 @@ func _ready() -> void:
 	lion_collision.disabled = true
 	bear_collision.disabled = true
 	
-	
+	snake_collisionMain.disabled = true
+	badger_collisionMain.disabled = true
+	crocodile_collisionMain.disabled = true
+	lion_collisionMain.disabled = true
+	bear_collisionMain.disabled = true
 
 func _physics_process(delta: float) -> void:
 	health = clamp(health, 0, 100)
@@ -100,6 +113,7 @@ func change_character(new_roll: int) -> void:
 			
 			# enable collision
 			mouse_collision.disabled = false
+			mouse_collisionMain.disabled = false
 			
 			# disable all other collision
 			snake_collision.disabled = true
@@ -107,6 +121,12 @@ func change_character(new_roll: int) -> void:
 			crocodile_collision.disabled = true
 			lion_collision.disabled = true
 			bear_collision.disabled = true
+			
+			snake_collisionMain.disabled = true
+			badger_collisionMain.disabled = true
+			crocodile_collisionMain.disabled = true
+			lion_collisionMain.disabled = true
+			bear_collisionMain.disabled = true
 	
 		2: # snake
 			
@@ -119,6 +139,7 @@ func change_character(new_roll: int) -> void:
 			
 			# enable collision
 			snake_collision.disabled = false
+			snake_collisionMain.disabled = false
 			
 			# disable all other collision
 			mouse_collision.disabled = true
@@ -126,6 +147,12 @@ func change_character(new_roll: int) -> void:
 			crocodile_collision.disabled = true
 			lion_collision.disabled = true
 			bear_collision.disabled = true
+			
+			mouse_collisionMain.disabled = true
+			badger_collisionMain.disabled = true
+			crocodile_collisionMain.disabled = true
+			lion_collisionMain.disabled = true
+			bear_collisionMain.disabled = true
 			
 		3: #badger
 			
@@ -138,6 +165,7 @@ func change_character(new_roll: int) -> void:
 			
 			# enable collision
 			badger_collision.disabled = false
+			badger_collisionMain.disabled = false
 			
 			# disable all other collision
 			mouse_collision.disabled = true
@@ -145,6 +173,12 @@ func change_character(new_roll: int) -> void:
 			crocodile_collision.disabled = true
 			lion_collision.disabled = true
 			bear_collision.disabled = true
+			
+			mouse_collisionMain.disabled = true
+			snake_collisionMain.disabled = true
+			crocodile_collisionMain.disabled = true
+			lion_collisionMain.disabled = true
+			bear_collisionMain.disabled = true
 			
 		4: # crocodile
 			
@@ -160,6 +194,7 @@ func change_character(new_roll: int) -> void:
 			
 			# enable collision
 			crocodile_collision.disabled = false
+			crocodile_collisionMain.disabled = false
 			
 			# disable all other collision
 			mouse_collision.disabled = true
@@ -167,6 +202,12 @@ func change_character(new_roll: int) -> void:
 			badger_collision.disabled = true
 			lion_collision.disabled = true
 			bear_collision.disabled = true
+			
+			mouse_collisionMain.disabled = true
+			snake_collisionMain.disabled = true
+			badger_collisionMain.disabled = true
+			lion_collisionMain.disabled = true
+			bear_collisionMain.disabled = true
 			
 		5: # lion
 			
@@ -179,6 +220,7 @@ func change_character(new_roll: int) -> void:
 			
 			# enable collision
 			lion_collision.disabled = false
+			lion_collisionMain.disabled = false
 			
 			# disable all other collision
 			mouse_collision.disabled = true
@@ -186,6 +228,12 @@ func change_character(new_roll: int) -> void:
 			badger_collision.disabled = true
 			crocodile_collision.disabled = true
 			bear_collision.disabled = true
+			
+			mouse_collisionMain.disabled = true
+			snake_collisionMain.disabled = true
+			badger_collisionMain.disabled = true
+			crocodile_collisionMain.disabled = true
+			bear_collisionMain.disabled = true
 			
 		6: # bear
 			
@@ -198,6 +246,7 @@ func change_character(new_roll: int) -> void:
 			
 			# enable collision
 			bear_collision.disabled = false
+			bear_collisionMain.disabled = false
 			
 			# disable all other collision
 			mouse_collision.disabled = true
@@ -205,6 +254,12 @@ func change_character(new_roll: int) -> void:
 			badger_collision.disabled = true
 			crocodile_collision.disabled = true
 			lion_collision.disabled = true
+			
+			mouse_collisionMain.disabled = true
+			snake_collisionMain.disabled = true
+			badger_collisionMain.disabled = true
+			crocodile_collisionMain.disabled = true
+			lion_collisionMain.disabled = true
 			
 		_: # default
 			sprite_idle = "mouse_idle"
@@ -222,7 +277,7 @@ func change_character(new_roll: int) -> void:
 
 func take_damage() -> void:
 	health -= 5
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(invincibility).timeout
 	taking_damage = false
 
 func attack() -> void:

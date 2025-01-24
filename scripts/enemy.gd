@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Enemy
 
 const SPEED = 2
-const min_distance = 5;
+const min_distance = 0;
 
 var health = 100
 
