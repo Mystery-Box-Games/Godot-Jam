@@ -39,8 +39,8 @@ position = Vector2(694, 453)
 [node name="UI" parent="." instance=ExtResource("4_ggn31")]
 
 [node name="Boundary" parent="." instance=ExtResource("5_ptpon")]
-position = Vector2(389, 363)
-scale = Vector2(3.58219, 3.71417)
+position = Vector2(371.5, 344.855)
+scale = Vector2(8.44692, 8.75813)
 
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="GameManager/DiceTimer" to="GameManager" method="_on_dice_timer_timeout"]
